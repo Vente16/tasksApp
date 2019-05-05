@@ -1,4 +1,4 @@
-# Triki game
+# Tasks App
 Todo list with Login
 
 Use this app is very esay!
