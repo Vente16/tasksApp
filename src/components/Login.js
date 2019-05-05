@@ -50,17 +50,22 @@ const styles = theme => ({
     textAlign: 'center',
     display:'none'
   },
+  required: {
+    marginTop: theme.spacing.unit,
+    color: 'red',
+    textAlign: 'left',
+    display:'none'
+  },
 
 });
-
 
 class Login extends Component{
 
   constructor(){
     super();
     this.state = {
-       'email': '',
-       'pass': ''
+      'email': '',
+      'pass': ''
     };
    
     this.login = this.login.bind(this);
@@ -70,11 +75,17 @@ class Login extends Component{
   componentWillMount() {
 
     if (Auth.validateSesion()) {
-     
-      this.props.history.push('/tasks');
-       
+      this.props.history.push('/tasks'); 
     }
   
+  }
+
+  showRequired(id){
+    document.getElementById(id).style.display = 'block';
+  }
+
+  hideRequired(id){
+    document.getElementById(id).style.display = 'none';
   }
 
   validLogin(){
@@ -90,6 +101,18 @@ class Login extends Component{
     let email = this.state.email;
     let pass = this.state.pass;
 
+    if (!email) {
+      this.showRequired('emailRequired');
+    }else{
+      this.hideRequired('emailRequired');
+    }
+
+    if (!pass) {
+      this.showRequired('passRequired');
+    }else{
+      this.hideRequired('passRequired');
+    }
+
     if (email && pass) {
       let auth = Auth.login(email, pass);
 
@@ -100,8 +123,9 @@ class Login extends Component{
       }else{
         this.invalidLogin();
       }
-
+ 
     }
+
   }
 
   setValue(e){
@@ -109,6 +133,14 @@ class Login extends Component{
     this.setState({
       [e.target.name]: e.target.value
     });
+
+    if (!e.target.value) {
+      this.showRequired(e.target.name+'Required');
+    }else{
+      this.hideRequired(e.target.name+'Required');
+    }
+
+    this.validLogin();
 
   }
 
@@ -129,11 +161,13 @@ class Login extends Component{
           <FormControl margin="normal" required fullWidth onSubmit={this.login}>
             <InputLabel htmlFor="email">Correo</InputLabel>
             <Input id="email" name="email" autoComplete="email" onChange={ this.setValue} autoFocus />
+            <span className={classes.required} id="emailRequired">Campo requerido.</span>
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Contraseña</InputLabel>
             <Input name="pass" type="password" id="password" autoComplete="current-password" 
             onChange={ this.setValue} />
+            <span className={classes.required} id="passRequired">Campo requerido.</span>
           </FormControl>
           
           <Button
