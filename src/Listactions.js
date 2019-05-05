@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -11,13 +9,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Delete } from '@material-ui/icons'
 import DeleteIcon from '@material-ui/icons/Delete';
-  
-
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -97,10 +91,9 @@ class Listactions extends Component{
 
   taskData(e){
 
-   
-      this.setState({
-        task: e.target.value
-     });
+    this.setState({
+      task: e.target.value
+    });
   
   }
 
@@ -108,14 +101,14 @@ class Listactions extends Component{
   deleteTodo(index){
      
     this.setState({
-        tasks: this.state.tasks.filter((e, i) => {
-            return i !== index
-         }),
-        taskTmp: this.state.taskTmp.filter((e, i) => {
-            return i !== index
-         })
+      tasks: this.state.tasks.filter((e, i) => {
+        return i !== index
+      }),
+      taskTmp: this.state.taskTmp.filter((e, i) => {
+        return i !== index
+      })
 
-   })
+   });
    
   }
 
@@ -127,8 +120,7 @@ class Listactions extends Component{
     <main className={classes.main}>
       <CssBaseline />
       <Paper className={classes.paper}>
-       
-        
+      
         <form className={classes.form} onSubmit={(e) => {e.preventDefault();}}>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Task</InputLabel>
@@ -148,54 +140,36 @@ class Listactions extends Component{
         </form>
 
         <div className={classes.demo}>
-             <List dense={dense}>
+            <List dense={dense}>
 
-             
-             
-
-                {
-
-                  this.state.tasks.map((task, i) => { 
+              { this.state.tasks.map((task, i) => { 
                     
-                    return (<ListItem key={i} className={classes.item}>
-                  <ListItemText
-                      primary={task}
-                      secondary={secondary ? 'Secondary text' : null}
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton aria-label="Delete" className={classes.delete} 
-                      onClick={() => this.deleteTodo(i)}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                 
-
-                    
+                return (
+                  <ListItem key={i} className={classes.item}>
+                      <ListItemText
+                        primary={task}
+                        secondary={secondary ? 'Secondary text' : null}
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton aria-label="Delete" className={classes.delete} 
+                        onClick={() => this.deleteTodo(i)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </ListItemSecondaryAction>
                   </ListItem>)
-
-
-                  })
+                })
                  
-                 
-               }
-                    
-                
-              
-                 
-               
-              </List>
+              }
+                   
+            </List>
         </div>
-
-        
-
-
       </Paper>
     </main>
   );
+  
   } 
   
-  }
-
+}
 
 Listactions.propTypes = {
   classes: PropTypes.object.isRequired,
