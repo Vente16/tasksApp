@@ -36,6 +36,7 @@ npm start
 
 Or
 ```
+npm i yarn 
 yarn start 
 ```
 
