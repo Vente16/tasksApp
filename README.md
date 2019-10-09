@@ -1,7 +1,7 @@
 # Tasks App
 Todo list with Login
 
-Use this app is very esay!
+Use this app is very easy!
 
 ## Demo
 
